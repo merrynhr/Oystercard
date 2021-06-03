@@ -1,4 +1,4 @@
-require './oystercard.rb'
+require 'oystercard'
 describe Oystercard do
     let(:station){ double :station}
 it 'has a balance of zero' do
