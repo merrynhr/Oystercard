@@ -67,6 +67,14 @@ describe '#in_journey?' do
     expect(journey.entry_station).to eq(station)    
    end
 
+   it 'checks that entry and exit station are stored' do
+       journey = Oystercard.new
+       journey.top_up(10)
+       journey.touch_in(station)
+       journey.touch_out(station)
+       expect(journey.list_of_journeys).to eq ([{station => station}])
+   end
+
    it 'has an empty list of journeys by default' do
        journey = Oystercard.new
        expect(journey.list_of_journeys).to be_empty
