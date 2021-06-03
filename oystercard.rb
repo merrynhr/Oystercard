@@ -16,7 +16,8 @@ class Oystercard
    end
    
    def in_journey?
-    !!entry_station
+    #!!entry_station
+    !@entry_station.nil?
    end
 
 

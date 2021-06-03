@@ -21,8 +21,10 @@ end
 context '#deduct' do 
 
     it 'deducts an amount from the balance' do 
-        subject.top_up(20)
-        expect {subject.touch_out}.to change{ subject.balance }.by(-1)
+        journey = Oystercard.new
+        journey.top_up(20)
+        journey.touch_in(station)
+        expect {journey.touch_out(station)}.to change{ journey.balance }.by(-1)
     end 
     end
 
@@ -39,8 +41,11 @@ describe '#in_journey?' do
    end
 
    it 'can touch out' do
-       subject.touch_out
-       expect(subject.in_journey?).to eq(false)
+       journey = Oystercard.new
+       journey.top_up(10)
+       journey.touch_in(station)
+       journey.touch_out(station)
+       expect(journey.in_journey?).to eq(false)
    end
    
    it 'can raise insufficient funds error' do
@@ -52,7 +57,7 @@ describe '#in_journey?' do
        journey = Oystercard.new
        journey.top_up(10)
        journey.touch_in(station)
-       expect{ journey.touch_out }.to change{ journey.balance}.by(-1)
+       expect{ journey.touch_out(station) }.to change{ journey.balance}.by(-1)
    end
 
    it 'stores the entry station' do
@@ -61,5 +66,11 @@ describe '#in_journey?' do
     journey.touch_in(station)
     expect(journey.entry_station).to eq(station)    
    end
+
+   it 'has an empty list of journeys by default' do
+       journey = Oystercard.new
+       expect(journey.list_of_journeys).to be_empty
+   end
 end
+
 end
