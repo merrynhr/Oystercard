@@ -1,7 +1,7 @@
 require 'oystercard'
 describe Oystercard do
     #Question? Just a fake class...
-    let(:station){ double :station}
+    ##let(:station){ double :station}
 it 'has a balance of zero' do
     expect(subject.balance). to eq(0)
 end
@@ -24,63 +24,63 @@ describe '#deduct' do
     it 'deducts an amount from the balance' do 
         journey = Oystercard.new
         journey.top_up(20)
-        journey.touch_in(station)
-        expect {journey.touch_out(station)}.to change{ journey.balance }.by(-1)
+        journey.touch_in
+        expect {journey.touch_out}.to change{ journey.balance }.by(-1)
     end 
     end
 
-describe '#in_journey?' do
-    it 'is initially not in a journey' do
-    expect(subject.in_journey?).to eq(false)
-   end
-end
+# describe '#in_journey?' do
+#     it 'is initially not in a journey' do
+#     expect(subject.in_journey?).to eq(false)
+#    end
+# end
 
 describe '#touch_in' do
-   it 'can touch in' do
-       journey = Oystercard.new
-       journey.top_up(10)
-       journey.touch_in(station)
-       expect(journey.in_journey?).to eq(true)
-   end
+#    it 'can touch in' do
+#        journey = Oystercard.new
+#        journey.top_up(10)
+#        journey.touch_in(station)
+#        expect(journey.in_journey?).to eq(true)
+#    end
 
    it 'can raise insufficient funds error' do
     journey = Oystercard.new
-    expect{journey.touch_in(station)}.to raise_error('insufficient funds')
+    expect{journey.touch_in}.to raise_error('insufficient funds')
    end
 end
 
 describe '#touch_out' do
-   it 'can touch out' do
-       journey = Oystercard.new
-       journey.top_up(10)
-       journey.touch_in(station)
-       journey.touch_out(station)
-       expect(journey.in_journey?).to eq(false)
-   end
+#    it 'can touch out' do
+#        journey = Oystercard.new
+#        journey.top_up(10)
+#        journey.touch_in(station)
+#        journey.touch_out(station)
+#        expect(journey.in_journey?).to eq(false)
+#    end
    
 
    it 'can deduct min charge when touched out' do
        journey = Oystercard.new
        journey.top_up(10)
-       journey.touch_in(station)
-       expect{ journey.touch_out(station) }.to change{ journey.balance}.by(-1)
+       journey.touch_in
+       expect{ journey.touch_out }.to change{ journey.balance}.by(-1)
    end
 end
  
 #question?
-describe '#list_of_journeys' do
-   it 'checks that entry and exit station are stored' do
-       journey = Oystercard.new
-       journey.top_up(10)
-       journey.touch_in(station)
-       journey.touch_out(station)
-       expect(journey.list_of_journeys).to eq ([{station => station}])
-   end
+# describe '#list_of_journeys' do
+#    it 'checks that entry and exit station are stored' do
+#        journey = Oystercard.new
+#        journey.top_up(10)
+#        journey.touch_in(station)
+#        journey.touch_out(station)
+#        expect(journey.list_of_journeys).to eq ([{station => station}])
+#    end
 
-   it 'has an empty list of journeys by default' do
-       journey = Oystercard.new
-       expect(journey.list_of_journeys).to be_empty
-   end
-end
+#    it 'has an empty list of journeys by default' do
+#        journey = Oystercard.new
+#        expect(journey.list_of_journeys).to be_empty
+#    end
+# end
 
 end
