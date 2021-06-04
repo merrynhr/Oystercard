@@ -1,11 +1,12 @@
 require 'oystercard'
 describe Oystercard do
+    #Question? Just a fake class...
     let(:station){ double :station}
 it 'has a balance of zero' do
     expect(subject.balance). to eq(0)
 end
  
-context '#top_up' do
+describe '#top_up' do
 
     it 'can top up balance' do
         expect{ subject.top_up(1)}.to change{ subject.balance }.by(1)
@@ -18,7 +19,7 @@ context '#top_up' do
     end
 end
 
-context '#deduct' do 
+describe '#deduct' do 
 
     it 'deducts an amount from the balance' do 
         journey = Oystercard.new
@@ -32,7 +33,9 @@ describe '#in_journey?' do
     it 'is initially not in a journey' do
     expect(subject.in_journey?).to eq(false)
    end
+end
 
+describe '#touch_in' do
    it 'can touch in' do
        journey = Oystercard.new
        journey.top_up(10)
@@ -40,6 +43,13 @@ describe '#in_journey?' do
        expect(journey.in_journey?).to eq(true)
    end
 
+   it 'can raise insufficient funds error' do
+    journey = Oystercard.new
+    expect{journey.touch_in(station)}.to raise_error('insufficient funds')
+   end
+end
+
+describe '#touch_out' do
    it 'can touch out' do
        journey = Oystercard.new
        journey.top_up(10)
@@ -48,10 +58,6 @@ describe '#in_journey?' do
        expect(journey.in_journey?).to eq(false)
    end
    
-   it 'can raise insufficient funds error' do
-       journey = Oystercard.new
-       expect{journey.touch_in(station)}.to raise_error('insufficient funds')
-   end
 
    it 'can deduct min charge when touched out' do
        journey = Oystercard.new
@@ -59,14 +65,10 @@ describe '#in_journey?' do
        journey.touch_in(station)
        expect{ journey.touch_out(station) }.to change{ journey.balance}.by(-1)
    end
-
-   it 'stores the entry station' do
-    journey = Oystercard.new
-    journey.top_up(10)
-    journey.touch_in(station)
-    expect(journey.entry_station).to eq(station)    
-   end
-
+end
+ 
+#question?
+describe '#list_of_journeys' do
    it 'checks that entry and exit station are stored' do
        journey = Oystercard.new
        journey.top_up(10)
