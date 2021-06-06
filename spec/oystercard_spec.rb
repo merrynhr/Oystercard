@@ -29,35 +29,24 @@ describe '#deduct' do
     end 
     end
 
-# describe '#in_journey?' do
-#     it 'is initially not in a journey' do
-#     expect(subject.in_journey?).to eq(false)
-#    end
-# end
 
 describe '#touch_in' do
-#    it 'can touch in' do
-#        journey = Oystercard.new
-#        journey.top_up(10)
-#        journey.touch_in(station)
-#        expect(journey.in_journey?).to eq(true)
-#    end
 
    it 'can raise insufficient funds error' do
     journey = Oystercard.new
     expect{journey.touch_in}.to raise_error('insufficient funds')
    end
+   
+   it 'can incur a penalty charge if no previous touch out' do
+       journey = Oystercard.new
+       journey.top_up(10)
+       journey.touch_in
+       expect{journey.touch_in}.to change{journey.balance}.by(-6)
+   end
+
 end
 
 describe '#touch_out' do
-#    it 'can touch out' do
-#        journey = Oystercard.new
-#        journey.top_up(10)
-#        journey.touch_in(station)
-#        journey.touch_out(station)
-#        expect(journey.in_journey?).to eq(false)
-#    end
-   
 
    it 'can deduct min charge when touched out' do
        journey = Oystercard.new
@@ -67,20 +56,4 @@ describe '#touch_out' do
    end
 end
  
-#question?
-# describe '#list_of_journeys' do
-#    it 'checks that entry and exit station are stored' do
-#        journey = Oystercard.new
-#        journey.top_up(10)
-#        journey.touch_in(station)
-#        journey.touch_out(station)
-#        expect(journey.list_of_journeys).to eq ([{station => station}])
-#    end
-
-#    it 'has an empty list of journeys by default' do
-#        journey = Oystercard.new
-#        expect(journey.list_of_journeys).to be_empty
-#    end
-# end
-
 end

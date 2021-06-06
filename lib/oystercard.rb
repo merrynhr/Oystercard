@@ -1,38 +1,32 @@
+#require_relative 'journey.rb'
 class Oystercard
 
    MAX_BALANCE = 90
    MIN_CHARGE = 1
-   attr_reader :balance # :entry_station, #:list_of_journeys
+   PENALTY = 6  
+
+   attr_reader :balance, :penalty_set
   
    def initialize
     @balance = 0
-   #  @entry_station = nil
-    #@list_of_journeys = []
+    @penalty_set = false
    end
     
    def top_up(amount)
       raise "max balance of #{MAX_BALANCE} exceeded" if amount + balance > MAX_BALANCE
       @balance += amount 
    end
-   
-   # def in_journey?
-   #  !@entry_station.nil?
-   # end
 
-
-   def touch_in#(station)
+   def touch_in
+     deduct(PENALTY) if @penalty_set == true
      raise 'insufficient funds' if @balance < MIN_CHARGE
-   #   @entry_station = station
-   #   @list_of_journeys.push({station => ''})
+     @penalty_set = true
     end 
 
-   def touch_out#(station)
+   def touch_out
     deduct(MIN_CHARGE)
-   #  @exit_station = station
-   #  @list_of_journeys[0][@entry_station] = station
-   #  @entry_station = nil
+    @penalty_set = false
    end
-
 
    private 
 

@@ -19,6 +19,9 @@ class Journey
     @exit_station = station
     @list_of_journeys[0][@entry_station] = station
     @entry_station = nil
+    @exit_station = nil
   end
+
+  
 
 end
