@@ -57,7 +57,7 @@ In order to be charged correctly
 As a customer
 I need a penalty charge deducted if I fail to touch in or out
 ```
-NB: I did not have time to implement user story 12. This user story uses zones to calculate fares, based on the length of one's journey. 
+NB: I did not have time to implement user story 12. This user story uses zones to calculate fares based on the length of one's journey. 
 User story 12 can be seen below.
 _____________________________________________________________________________
 ```
