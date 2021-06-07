@@ -1,19 +1,18 @@
 OYSTERCARD CHALLENGE (MAKERS WEEK 2)
 _________________________________________
 
-Using TDD to simulate London's tube/oystercard system! 
-..................................................................................................
+* Using TDD to simulate London's tube/oystercard system! 
 
 How to use:
 
-$ git clone https://github.com/merrynhr/Oystercard.git
-$ cd Oystercard
-$ rspec
-$ irb
+* $ git clone https://github.com/merrynhr/Oystercard.git
+* $ cd Oystercard
+* $ rspec
+* $ irb
 
 User stories I used to create this project
 __________________________________________________________
-
+```
 In order to use public transport
 As a customer
 I want money on my card
@@ -57,12 +56,12 @@ I want to know what zone a station is in
 In order to be charged correctly
 As a customer
 I need a penalty charge deducted if I fail to touch in or out
-
+```
 NB: I did not have time to implement user story 12. This user story uses zones to calculate fares, based on the length of one's journey. 
 User story 12 can be seen below.
 _____________________________________________________________________________
-
+```
 In order to be charged the correct amount
 As a customer
 I need to have the correct fare calculated
-
+```
