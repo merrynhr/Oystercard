@@ -2,9 +2,9 @@ OYSTERCARD CHALLENGE (MAKERS WEEK 2)
 _________________________________________
 
 Using TDD to simulate London's tube/oystercard system! 
+..................................................................................................
 
-How to use
-__________________________________________
+How to use:
 
 $ git clone https://github.com/merrynhr/Oystercard.git
 $ cd Oystercard
